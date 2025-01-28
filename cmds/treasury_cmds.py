@@ -572,21 +572,21 @@ def bootstrap_spot_rates(df):
 
 
 from dateutil.relativedelta import relativedelta
-from datetime import datetime
+#from datetime import datetime
 
 
 def find_next_coupon_date(first_cpn_date, today_date):
 
 # Check if inputs are strings, and convert them to datetime if necessary
     if isinstance(first_cpn_date, str):
-        past_date = datetime.strptime(first_cpn_date, "%Y-%m-%d")
+        past_date = datetime.datetime.strptime(first_cpn_date, "%Y-%m-%d")
     elif isinstance(first_cpn_date, datetime):
         past_date = first_cpn_date
     else:
         raise ValueError("first_cpn_date must be a date string or datetime object")
     
     if isinstance(today_date, str):
-        today = datetime.strptime(today_date, "%Y-%m-%d")
+        today = datetime.datetime.strptime(today_date, "%Y-%m-%d")
     elif isinstance(today_date, datetime):
         today = today_date
     else:
