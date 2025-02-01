@@ -60,7 +60,7 @@ def get_coupon_dates(quote_date,maturity_date):
         maturity_date = datetime.datetime.strptime(maturity_date,'%Y-%m-%d')
     
     # divide by 180 just to be safe
-    temp = pd.date_range(end=maturity_date, periods=np.ceil((maturity_date-quote_date).days/180), freq=pd.DateOffset(months=6))
+    temp = pd.date_range(end=maturity_date, periods=int(np.ceil((maturity_date-quote_date).days/180)), freq=pd.DateOffset(months=6))
     # filter out if one date too many
     temp = pd.DataFrame(data=temp[temp > quote_date])
 
@@ -127,7 +127,7 @@ def filter_treasuries(data, t_date=None, filter_maturity = None, filter_maturity
 
 def calc_cashflows(quote_data, filter_maturity_dates=False):
     
-    CF = pd.DataFrame(data=0, index=quote_data.index, columns=quote_data['TMATDT'].unique())
+    CF = pd.DataFrame(dtype=float, data=0, index=quote_data.index, columns=quote_data['TMATDT'].unique())
 
     for i in quote_data.index:
         coupon_dates = get_coupon_dates(quote_data.loc[i,'CALDT'],quote_data.loc[i,'TMATDT'])

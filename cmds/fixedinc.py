@@ -66,7 +66,7 @@ def calc_cashflows(quote_data, filter_maturity_dates=False):
         raise ValueError("Unrecognized data format: Missing key columns.")
 
     # Initialize the cashflow matrix
-    CF = pd.DataFrame(data=0, index=quote_data.index, columns=quote_data[maturity_col].unique())
+    CF = pd.DataFrame(dtype=float, data=0, index=quote_data.index, columns=quote_data[maturity_col].unique())
 
     for i in quote_data.index:
         # Get coupon dates
